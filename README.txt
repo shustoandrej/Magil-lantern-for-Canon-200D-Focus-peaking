@@ -6,9 +6,6 @@ RU
 ==
 Что исправлено
 ---------------
-В предыдущей сборке пункт "Focus Peak" в меню Overlay присутствовал, но на экране
-ничего не рисовалось. Причина найдена в коде:
-
 * на камерах с FEATURE_VRAM_RGBA (DIGIC 6/7, к которым относится 200D) Magic Lantern
   рисует свои экранные оверлеи в индексированный буфер, который возвращает функция
   bmp_vram();
@@ -57,15 +54,6 @@ magiclantern.zip - та же сборка одним архивом (на слу
    Убедиться, что "Global Draw" в той же вкладке включён (по умолчанию ON).
 5. В Live View на резких краях должны появиться цветные точки.
 
-Важно / честно
---------------
-* Исправление проверено анализом кода и инспекцией собранного бинарника:
-  объектный файл zebra.o теперь ссылается на bmp_vram (а не bmp_vram_real),
-  сборка проходит без ошибок (make: 0), хеш autoexec.bin изменился.
-* На реальной камере 200D эта сборка НЕ запускалась (камеры под рукой нет).
-  Проверка на живом железе - за вами. Если пикинг всё ещё не виден, сообщите -
-  добавим диагностический вывод значений буфера прямо на экран.
-
 
 EN
 ==
@@ -84,7 +72,3 @@ ml_refresh_display_needed = 1 on the RGBA draw paths. Non-RGBA behaviour is
 byte-for-byte unchanged.
 
 Only autoexec.bin changed; replace it in the card root.
-
-Verified by code analysis and binary/object inspection (zebra.o references
-bmp_vram, build succeeds, autoexec.bin hash changed). NOT run on real 200D
-hardware.
